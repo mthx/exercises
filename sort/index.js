@@ -13,23 +13,16 @@ function mergeSortedLists(left, right) {
   var result = [];
   var l = 0;
   var r = 0;
-  while (l < left.length || r < right.length) {
+  while (l < left.length && r < right.length) {
     if (left[l] <= right[r]) {
       result.push(left[l++]);
     }
     else {
       result.push(right[r++]);
     }
-    // Bail out if we've run out of left or right
-    if (l == left.length) {
-      Array.prototype.push.apply(result, right.slice(r));
-      break;
-    }
-    if (r == right.length) {
-      Array.prototype.push.apply(result, left.slice(l));
-      break;
-    }
   }
+  Array.prototype.push.apply(result, right.slice(r));
+  Array.prototype.push.apply(result, left.slice(l));
   return result;
 }
 
