@@ -27,5 +27,20 @@ describe('flattenThunk', function() {
     });
   });
 
+  it('handles errors', function(done) {
+
+    var thunk1 = function(cb) {
+      setTimeout(function() {
+        cb('error', null);
+      }, 1);
+    }
+
+    flattenThunk(thunk1)(function(err, result) {
+      assert.equal(err, 'error');
+      assert.equal(result, null);
+      done();
+    });
+  });
+
 
 });
