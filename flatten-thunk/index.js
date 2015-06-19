@@ -1,14 +1,11 @@
 function flattenThunk(thunk) {
   return function(ultimateCallback) {
     var recurse = function(err, result) {
-      if (err) {
-        ultimateCallback(err, null);
-      }
-      else if (typeof result === 'function') {
+      if (typeof result === 'function') {
         result(recurse);
       }
       else {
-        ultimateCallback(null, result);
+        ultimateCallback(err, result);
       }
     }
     thunk(recurse);

@@ -31,12 +31,12 @@ describe('flattenThunk', function() {
 
     var thunk1 = function(cb) {
       setTimeout(function() {
-        cb('error', null);
+        cb(false, null);
       }, 1);
     }
 
     flattenThunk(thunk1)(function(err, result) {
-      assert.equal(err, 'error');
+      assert.equal(err, false);
       assert.equal(result, null);
       done();
     });
